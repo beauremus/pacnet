@@ -58,9 +58,11 @@ def arduino_request(self, request):
 
     format_request = request.encode('utf-8')
     self.serial.write(format_request)
-    time.sleep(.066)
+    time.sleep(.05)
     arduino_response = self.serial.read(self.serial.inWaiting()).decode()
-    print(arduino_response)
+    first_response = arduino_response.split('\r')[0]
+    if first_response == '':
+        first_response = '0'
     return scale_reading(int(arduino_response.split('\r')[0]))
 
 def scale_reading(raw):
