@@ -7,7 +7,6 @@ extern "C"{
 
 void setup() { // code run once
   Serial.begin(9600);
-  Serial.println("<Arduino is ready>");
 }
 
 int outputVoltageOn = 255; // 3.3V
