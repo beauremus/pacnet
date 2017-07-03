@@ -2,3 +2,4 @@ node_modules
 .pioenvs
 .piolibdeps
 .vscode
+__pycache__
