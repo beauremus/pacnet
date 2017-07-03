@@ -49,7 +49,7 @@ void read(int pinNum) {
 }
 
 void write(int pinNum, int status) {
-  if (status) {
+  if (status == '1') {
     analogWrite(pinNum, outputVoltageOn);
     read(pinNum);
   } else {
