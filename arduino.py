@@ -60,10 +60,10 @@ def arduino_request(self, request):
     self.serial.write(format_request)
     time.sleep(.05)
     arduino_response = self.serial.read(self.serial.inWaiting()).decode()
-    first_response = arduino_response.split('\r')[0]
-    if first_response == '':
-        first_response = '0'
-    return scale_reading(int(arduino_response.split('\r')[0]))
+    third_response = arduino_response.split('\r')[2]
+    if third_response == '':
+        third_response = '0'
+    return scale_reading(int(third_response))
 
 def scale_reading(raw):
     """Scales the raw integer from Arduino to voltage
