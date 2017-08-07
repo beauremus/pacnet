@@ -2,7 +2,7 @@
 
 ## Getting Started
 
-Getting started will walk you through setup that is required before using the Python-ACNET interface.
+Getting started will walk you through setup that is required before using the Pi-ACNET interface.
 
 ## Equipment
 
