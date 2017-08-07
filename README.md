@@ -1,4 +1,4 @@
-# Python-ACNET Interface (PACNET)
+# Pi-ACNET Interface (PACNET)
 
 ## Getting Started
 
