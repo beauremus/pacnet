@@ -25,3 +25,9 @@ Download this repository into the pi user home folder.
 Ideally the PACNET package runs headless without any necessary intervention to function in the field.
 
 In order to have the `write.py` run on startup, add `./pacnet/autoStart.sh` to the `.bashrc` file in the pi home directory.
+
+## TODOs
+
+  - Pull down resistors
+  - Constant current transistor
+  - Differential OpAmp for inputs

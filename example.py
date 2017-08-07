@@ -33,6 +33,26 @@ def compare_and_update(read_pin, device, write_pin):
         device.set_status(write_pin, '0')
         return 0
 
+def compare(read_pin, device):
+    """This isn't empty"""
+
+    if in_tolerance(ARDUINO.get_pin(read_pin), device.get_alarm()):
+        return True
+    else:
+        return False
+
+def update_arduino(write_pin, value):
+    """This isn't empty"""
+
+    ARDUINO.set_pin(write_pin, value)
+    return True
+
+def update_device(device, bit_number, value):
+    """This isn't empty"""
+
+    device.set_status()
+    return True
+
 def in_tolerance(value, tolerance):
     """Returns a boolean indicator of tolerance based on inputs
 
