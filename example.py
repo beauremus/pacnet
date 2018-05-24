@@ -1,74 +1,23 @@
-#!/usr/bin/env python
-"""Example script using acnet.py and arduino.py"""
+#!/usr/bin/env python3
+"""Example script using acnet.py and Firmata"""
 
-from arduino import Arduino
+from pymata_aio.pymata3 import PyMata3
+from pymata_aio.constants import Constants
 from acnet import Device
 
-ARDUINO = Arduino()
-BEAU = Device('G:BEAU')
+ARDUINO = PyMata3()
 REMOTE = Device('Z:REMOTE')
-Q806_OUTPUT_PIN = '06'
-Q806_PIN = '20'
-V100_OUTPUT_PIN = '07'
-V100_PIN = '21'
+ARDUINO.read_pin = 2
+ON = 1023
+OFF = 0
 
-def compare_and_update(read_pin, device, write_pin):
-    """Reads input pin and compares to device alarm min and max to determine output of output pin
+ARDUINO.set_pin_mode(ARDUINO.read_pin, Constants.ANALOG)
 
-        Args:
-            read_pin (str): Two digit pin number
-            device (obj): ACNET device object
-            write_pin (str): Two digit pin number
-
-        Returns:
-            boolean: True if in tolerance
-        """
-
-    if in_tolerance(ARDUINO.get_pin(read_pin), device.get_alarm()):
-        ARDUINO.set_pin(write_pin, '1')
-        device.set_status(write_pin, '1')
-        return 1
-    else:
-        ARDUINO.set_pin(write_pin, '0')
-        device.set_status(write_pin, '0')
-        return 0
-
-def compare(read_pin, device):
-    """This isn't empty"""
-
-    if in_tolerance(ARDUINO.get_pin(read_pin), device.get_alarm()):
-        return True
-    else:
-        return False
-
-def update_arduino(write_pin, value):
-    """This isn't empty"""
-
-    ARDUINO.set_pin(write_pin, value)
-    return True
-
-def update_device(device, bit_number, value):
-    """This isn't empty"""
-
-    device.set_status()
-    return True
-
-def in_tolerance(value, tolerance):
-    """Returns a boolean indicator of tolerance based on inputs
-
-        Args:
-            value (num): A value to compare to min and max
-            tolerance (dict): Dictionary including min and max values
-
-        Returns:
-            boolean: True if within tolerance
-    """
-
-    if float(value) > tolerance['min'] and float(value) < tolerance['max']:
-        return True
-    else:
-        return False
+def rawToVolts(raw):
+    return raw/1023*5
 
 while True:
-    compare_and_update(Q806_PIN, BEAU, Q806_OUTPUT_PIN)
-    compare_and_update(V100_PIN, REMOTE, V100_OUTPUT_PIN)
+    ARDUINO.sleep(1)
+    readingVolts = rawToVolts(ARDUINO.analog_read(ARDUINO.read_pin))
+    print(readingVolts)
+    REMOTE.set_setting(readingVolts)

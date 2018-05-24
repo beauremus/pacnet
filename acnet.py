@@ -3,7 +3,7 @@
 
 from xmlrpc.client import ServerProxy
 
-REMOTE = ServerProxy('http://www-bd.fnal.gov/xmlrpc/Remote').Remote
+REMOTE = ServerProxy('http://www-bd.fnal.gov/xmlrpc/Remote')
 ALARM = ServerProxy('http://www-bd.fnal.gov/xmlrpc/Accelerator')
 
 class Device:
@@ -100,5 +100,7 @@ class Device:
         """
 
         data = ALARM.getReading(self.name.replace(':', '@'))
+        if 'maxscaled' not in data or 'minscaled' not in data:
+            return {'max': None, 'min': None}
 
         return {'max': data['maxscaled'], 'min': data['minscaled']}
