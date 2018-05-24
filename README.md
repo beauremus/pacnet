@@ -15,3 +15,7 @@ Refer to the [Firmata protocol](https://github.com/firmata/arduino) for more det
 I have implemented a [simple example](example.py) using the [pymata library](https://github.com/MrYsLab/pymata-aio) for Python. Be aware that this example is basic and the documentation suggests using a [callback structure](https://gist.github.com/MrYsLab/0b9f125f04f171065af0) to get data.
 
 This code is run from the computer attached to the Arduino board via USB whether it be a laptop or Raspberry Pi.
+
+## ACNET interface
+
+You can use XML-RPC to send messages to ACNET on your own, but I have written a helper library [`acnet.py`](acnet.py) to accomplish common tasks. Refer to the code for documentation.
